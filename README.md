@@ -1,51 +1,185 @@
-# VLSI-LAB-EXPERIMENTS
-AIM: To simulate and synthesis Logic Gates,Adders and Subtractor using Xilinx ISE.
+EXP-1
 
-APPARATUS REQUIRED: Xilinx 14.7 Spartan6 FPGA
+date:
 
-PROCEDURE: STEP:1 Start the Xilinx navigator, Select and Name the New project. STEP:2 Select the device family, device, package and speed. STEP:3 Select new source in the New Project and select Verilog Module as the Source type. STEP:4 Type the File Name and Click Next and then finish button. Type the code and save it. STEP:5 Select the Behavioral Simulation in the Source Window and click the check syntax. STEP:6 Click the simulation to simulate the program and give the inputs and verify the outputs as per the truth table. STEP:7 Select the Implementation in the Sources Window and select the required file in the Processes Window. STEP:8 Select Check Syntax from the Synthesize XST Process. Double Click in the Floorplan Area/IO/Logic-Post Synthesis process in the User Constraints process group. UCF(User constraint File) is obtained. STEP:9 In the Design Object List Window, enter the pin location for each pin in the Loc column Select save from the File menu. STEP:10 Double click on the Implement Design and double click on the Generate Programming File to create a bitstream of the design.(.v) file is converted into .bit file here. STEP:12 Load the Bit file into the SPARTAN 6 FPGA STEP:11 On the board, by giving required input, the LEDs starts to glow light, indicating the output.
+                 SIMULATION OF LOGIC GATES ,ADDERS AND SUBTRACTORS
+AIM: To simulate Logic Gates ,Adders and Subtractors using Vivado 2023.2.
 
-Logic Diagram :
+APPARATUS REQUIRED: VIVADO 2023.2
 
-Logic Gates:
-![image](https://github.com/navaneethans/VLSI-LAB-EXPERIMENTS/assets/6987778/ee17970c-3ac9-4603-881b-88e2825f41a4)
+PROCEDURE:
 
+STEP:1 Launch the Vivado 2023.2 software.
 
-Half Adder:
+STEP:2 Click on “create project ” from the starting page of vivado.
 
-![image](https://github.com/navaneethans/VLSI-LAB-EXPERIMENTS/assets/6987778/0e1ecb96-0c25-4556-832b-aeeedfdfe7b9)
+STEP:3 Choose the design entry method:RTL(verilog/VHDL).
 
+STEP:4 Crete design source and give name to it and click finish.
 
-Full adder:
+STEP:5 Write the verilog code and check the syntax.
 
-![image](https://github.com/navaneethans/VLSI-LAB-EXPERIMENTS/assets/6987778/9bb3964c-438f-469d-a3de-c1cca6f323fb)
+STEP:6 Click “run simulation” in the navigator window and click “Run behavioral simulation”.
 
+STEP:7 Verify the output in the simulation window.
 
-Half Subtractor:
+LOGIC GATES LOGIC DIAGRAM :
 
-![image](https://github.com/navaneethans/VLSI-LAB-EXPERIMENTS/assets/6987778/731470b7-eb4e-49f8-8bb7-2994052a7184)
+![image](https://github.com/navaneethans/VLSI-LAB-EXP-1/assets/161431337/91ba7a79-0178-4ca6-9e12-0a0ff50b35fd)
 
+VERILOG CODE
+```
+module logicgate (a,b,andgate,orgate,xorgate,nandgate,norgate,xnorgate,notgate);
+input a,b;  
+output andgate,orgate,xorgate,nandgate,norgate,xnorgate,notgate;
+and(andgate,a,b);
+or(orgate,a,b);
+xor(xorgate,a,b);
+nand(nandgate,a,b); 
+nor(norgate,a,b);
+xnor(xnorgate,a,b);
+not(notgate,a);
+endmodule
+```
 
+OUTPUT WAVEFORM
+![328455264-a62e4538-0094-4126-b762-1a1fdc1e8931](https://github.com/navaneethans/VLSI-LAB-EXP-1/assets/161431337/35cd502f-3c0a-445c-8e02-6cc45d271711)
 
-Full Subtractor:
+HALF ADDER LOGIC DIAGRAM
 
-![image](https://github.com/navaneethans/VLSI-LAB-EXPERIMENTS/assets/6987778/d66f874b-c1f2-44b3-a035-7149b56430c1)
+![image](https://github.com/navaneethans/VLSI-LAB-EXP-1/assets/161431337/44a3934e-b7d9-47b9-8a3e-2a4cdf9b201f)
 
+VERILOG CODE :
+```
+module half_adder(a,b,sum,carry);
 
+input a,b;
 
-8 Bit Ripple Carry Adder
+output sum,carry;
 
-![image](https://github.com/navaneethans/VLSI-LAB-EXPERIMENTS/assets/6987778/7385a408-40a5-4203-8050-b72818622d79)
+xor g1(sum,a,b);
 
+and g2(carry,a,b);
 
+endmodule
+```
+
+OUTPUT WAVEFORM:
+
+![image](https://github.com/navaneethans/VLSI-LAB-EXP-1/assets/161431337/8e8056c2-cae2-4c84-90ed-306d911c66d0)
+
+FULL ADDER LOGIC DIAGRAM:
+
+![image](https://github.com/navaneethans/VLSI-LAB-EXP-1/assets/161431337/91d0bd80-170c-44c5-af56-69bf6ebac7bb)
 
 VERILOG CODE:
+```
+module fulladder(a,b,c,sum,carry);
 
-----Type Verilog Code
+input a,b,c;
 
-OUTPUT:
+output sum,carry;
 
------Place a Waveform Generated from Xilinx ISE
+wire w1,w2,w3;
+
+xor(w1,a,b);
+
+xor(sum,w1,c);
+
+and(w2,w1,c);
+
+and(w3,a,b);
+
+or(carry,w2,w3);
+
+endmodule
+```
+
+OUTPUT WAVEFORM:
+
+![image](https://github.com/navaneethans/VLSI-LAB-EXP-1/assets/161431337/0c060f32-886e-46cb-9cc6-822eaa324087)
+
+FULL ADDER LOGIC DIAGRAM:
+
+![image](https://github.com/navaneethans/VLSI-LAB-EXP-1/assets/161431337/04ad8dce-3aa9-4fea-ae3d-e6ba9aff9d3f)
+
+VERILOG CODE:
+```
+module fs(a,b,bin,d,bout);
+
+input a,b,bin;
+
+output d,bout;
+
+wire w1,w2,w3;
+
+xor(w1,a,b);
+
+xor(d,w1,bin);
+
+and(w2,~a,b);
+
+and(w3,~w1,bin);
+
+or(bout,w3,w2);
+
+endmodule
+```
+
+OUTPUT WAVEFORM:
+
+![image](https://github.com/navaneethans/VLSI-LAB-EXP-1/assets/161431337/46fe99d1-6ea4-423d-bfcc-2bb21956551a)
+
+RIPPLE CARRY ADDER LOGIC DIAGRAM:
+
+![image](https://github.com/navaneethans/VLSI-LAB-EXP-1/assets/161431337/b045b002-8159-4585-af34-7a11472f001b)
+
+VERILOG CODE:
+```
+module fulladder(a,b,c,sum,carry);
+input a,b,c;
+output sum,carry;
+wire w1,w2,w3;
+xor(w1,a,b);
+xor(sum,w1,c);
+and(w2,w1,c);
+and(w3,a,b);
+or(carry,w2,w3);
+endmodule
+
+module rca_8bit(a,b,cin,s,cout);
+input [7:0]a,b;
+input cin;
+output [7:0]s;
+output cout;
+wire [7:1]w;
+fulladder f1(a[0], b[0], cin, s[0], w[1]);
+fulladder f2(a[1], b[1], w[1], s[1], w[2]);
+fulladder f3(a[2], b[2], w[2], s[2], w[3]);
+fulladder f4(a[3], b[3], w[3], s[3], w[4]);
+fulladder f5(a[4], b[4], w[4], s[4], w[5]);
+fulladder f6(a[5], b[5], w[5], s[5], w[6]);
+fulladder f7(a[6], b[6], w[6], s[6], w[7]);
+fulladder f8(a[7], b[7], w[7], s[7], cout);
+endmodule
+```
+
+OUTPUT WAVEFORM:
+
+![image](https://github.com/navaneethans/VLSI-LAB-EXP-1/assets/161431337/cdbc2b32-ca9e-4bab-849a-1d5f15b87577)
 
 RESULT:
+   simulation of Logic Gates ,Adders and Subtractors using Vivado 2023.2 is verified.
+
+
+
+
+
+
+
+
+
+
+
+
 
